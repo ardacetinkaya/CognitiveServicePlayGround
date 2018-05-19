@@ -9,7 +9,7 @@ Usage of the code is very simple. All you have to do is just run the below code.
 
 
 ```python
-python FindFaces.py --path '/Users/Arda/Desktop/arda.jpg'
+python FindFaces.py ``--path`` '/Users/Arda/Desktop/arda.jpg'
 ```
 
 
