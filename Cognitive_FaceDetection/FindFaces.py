@@ -6,15 +6,33 @@ from PIL import Image, ImageDraw
 import cognitive_face as CF
 import time
 import logging
+try:
+    import picamera
+except ImportError:
+    pass
 
-KEY = '<WRITE YOUR API KEY>' #Write your Cogniteve Servie Key
+KEY = '<WRITE YOUR API KEY>' #Write your Cognitive Service Key
 BASE_URL = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/'  
 
 API_URL='https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'  
 API_HEADER = {'Ocp-Apim-Subscription-Key': KEY,
           'Content-Type': 'application/octet-stream'}
 API_PARAMS = {'language': 'unk'}
+FORMAT = '%(asctime)-15s %(message)s'
+logging.basicConfig(format=FORMAT)
 
+def takePhoto():
+    resultPath='/home/pi/Projects/CameraApp/image.jpg' #Some custom path to save taken photo
+    try:
+        with picamera.PiCamera() as camera:
+            camera.start_preview()
+            time.sleep(1)
+            camera.capture(resultPath)
+            camera.stop_preview()
+    except Exception, e:
+        logging.error(str(e))
+    
+    return resultPath
 
 def getFaceFromURL(img_url):
     faces=None
@@ -44,6 +62,7 @@ def getFaceFromPath(photo):
 
         response.raise_for_status()
         data = response.json()
+        logging.log(logging.WARNING,'Response data: '+str(data))
     except Exception, e:
         logging.error(str(e))
     return data
@@ -64,8 +83,7 @@ def main():
         args = parser.parse_args()
 
         if (args.url is None) and (args.path is None):
-            print('FindFaces.py --path <photo path> [--url <photo url>]')
-            sys.exit()
+            logging.log(logging.WARNING,'FindFaces.py --path <photo path> [--url <photo url>]')
 
         if args.url is not None:
             IMAGE_URL=args.url
@@ -76,13 +94,24 @@ def main():
             IMAGE_PATH=args.path
             faces = getFaceFromPath(IMAGE_PATH)
             img = Image.open(IMAGE_PATH)
+        else:
+            logging.log(logging.WARNING,'No argument is given. Raspberry Pi Cam. will take for your photo.Wait a second... :)')
+            IMAGE_PATH=takePhoto()
+            faces = getFaceFromPath(IMAGE_PATH)
+            img = Image.open(IMAGE_PATH)
         
         draw = ImageDraw.Draw(img)
 
         if faces is not None:
+            if len(faces)==0:
+                logging.warning('No photo is taken...')
+                sys.exit(12)
+
             for face in faces:
                 draw.rectangle(getRectangle(face), outline='red')
-            img.save('result.jpg')
+            timestr = time.strftime("%Y%m%d-%H%M%S")
+            img.save(timestr+'_result.jpg')
+            logging.warning('It''s done.')
     except Exception, e:
         logging.error('Something is wrong!!! ):')
         logging.error(' Detail:'+str(e))
