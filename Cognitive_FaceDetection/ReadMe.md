@@ -7,5 +7,10 @@ Face API detects faces in a photo and return some information about it. This sim
 
 Usage of the code is very simple. All you have to do is just run the below code. Be sure that the path location for your photo is correct.
 
+
+```python
 python FindFaces.py --path '/Users/Arda/Desktop/arda.jpg'
+```
+
+
 
