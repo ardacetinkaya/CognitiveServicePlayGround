@@ -18,3 +18,16 @@ python FindFaces.py --path '/Users/Arda/Desktop/arda.jpg'
 
 
 
+### Raspberry Pi
+
+This small code also can be run on Raspberry Pi models. This small demostration is done on Raspberry Pi Zero W, but all other models can be used :)
+
+![alt text](https://github.com/ardacetinkaya/CognitiveServicePlayGround/blob/master/Cognitive_FaceDetection/RaspberrPiZero.JPG?raw=true "Raspberry Pi")
+
+For OS, Rasbian is used. And be sure that Cognitive Service Face API SDK for python is installed. You must have this. So just use **pip** to install it.
+
+```python
+pip install cognitive_face
+```
+
+
