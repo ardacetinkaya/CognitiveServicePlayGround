@@ -103,7 +103,8 @@ def getAge(faceDictionary):
 def writeInfo(age, gender, emotion, width, draw, x, y):
     text = str(age) + ' years old ' + gender + ' mood:' + emotion
     lines = []
-    font = ImageFont.truetype('SFNSText.ttf', 8)  # Change font for OS
+    #font = ImageFont.truetype('SFNSText.ttf', 8)  # Change font for OS
+    font = ImageFont.load_default()
     if font.getsize(text)[0] <= width:
         lines.append(text)
     else:
@@ -160,7 +161,8 @@ def main():
             if len(faces) == 0:
                 logging.warning('No photo is taken...')
                 sys.exit(12)
-            font = ImageFont.truetype('SFNSText.ttf', 8)  # Change font for OS
+            #font = ImageFont.truetype('SFNSText.ttf', 8)  # Change font for OS
+            font = ImageFont.load_default()
             for face in faces:
                 coordinate = getRectangle(face)
                 c = coordinate[0]
