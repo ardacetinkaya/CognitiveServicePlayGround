@@ -30,4 +30,9 @@ For OS, Rasbian is used. And be sure that Cognitive Service Face API SDK for pyt
 pip install cognitive_face
 ```
 
+### Emotions
+
+Face API also provides some information about emotions. So you may learn about more from a people in photos.
+
+![alt text](https://github.com/ardacetinkaya/CognitiveServicePlayGround/blob/master/Cognitive_FaceDetection/TakenByRaspberryPi.jpg "Raspberry Pi")
 
