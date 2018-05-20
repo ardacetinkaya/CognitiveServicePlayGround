@@ -4,6 +4,8 @@ This is a simple demostration to find faces in a photo with **Cognitive Services
 
 Basicly the application post some photo to *https://[location].api.cognitive.microsoft.com/face/v1.0/detect* to Cognitive Services Face API.
 
+You may also check my other samples for Windows apps. with C#   ===> **https://github.com/ardacetinkaya/Miyop.HDYF**
+
 ### FACE API
 Face API detects faces in a photo and return some information about it. This simple demostration gets face location info from result and draw a rectangle around the face.
 
