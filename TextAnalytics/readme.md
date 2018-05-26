@@ -6,3 +6,4 @@ Also some key phrases are retrived from Cognitive Services APIs. (Text Analytics
 
 For tutorial, the plots of Lords of The Ring is used. The plots for each movie is used from a source from a web-site ---> https://www.cliffsnotes.com/literature/l/the-lord-of-the-rings/book-summary/the-fellowship-of-the-ring
 
+For more information about Text Analytics API, check https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview
